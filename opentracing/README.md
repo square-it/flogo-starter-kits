@@ -68,7 +68,7 @@ export FLOGO_OPENTRACING_ENDPOINTS=none
 After configuring the contribution, run the application:
 
 ```
-./bin/app*                             # * will catch the .exe if testing on Windows
+./bin/flogo-app-opentracing*           # * will catch the .exe if testing on Windows
 ```
 
 Trigger a REST event with cURL:
