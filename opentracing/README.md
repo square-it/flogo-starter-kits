@@ -11,7 +11,7 @@ It adds the [*Square IT Services* OpenTracing contribution](https://github.com/s
 
 ## Create the application
 
-The application can be created using the [*flogo.json* from this directory](./opentracing/flogo.json) and the [Flogo CLI](https://github.com/project-flogo/cli):
+The application can be created using the [*flogo.json* from this directory](./flogo.json) and the [Flogo CLI](https://github.com/project-flogo/cli):
 
 ```
 flogo create -f https://raw.githubusercontent.com/square-it/flogo-starter-kits/master/opentracing/flogo.json flogo-app-opentracing
