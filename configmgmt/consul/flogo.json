@@ -1,0 +1,93 @@
+{
+  "name": "_APP_NAME_",
+  "type": "flogo:app",
+  "version": "0.0.1",
+  "description": "A Flogo application with configuration stored in Consul",
+  "imports": [
+    "github.com/project-flogo/contrib@v0.9.0-alpha.4:/activity/log",
+    "github.com/project-flogo/contrib@v0.9.0-alpha.4:/trigger/rest",
+    "github.com/project-flogo/flow@v0.9.0-alpha.5",
+    "github.com/square-it/flogo-config-mgmt/consul@modules"
+  ],
+  "triggers": [
+    {
+      "id": "my_rest_trigger",
+      "type": "rest",
+      "settings": {
+        "port": "8888"
+      },
+      "handlers": [
+        {
+          "settings": {
+            "method": "GET",
+            "path": "/test/:val"
+          },
+          "actions": [
+            {
+              "type": "flow",
+              "settings": {
+                "flowURI": "res://flow:simple_flow"
+              },
+              "input": {
+                "in": "=$.pathParams.val"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "resources": [
+    {
+      "id": "flow:simple_flow",
+      "data": {
+        "name": "simple_flow",
+        "metadata": {
+          "input": [
+            {
+              "name": "in",
+              "type": "string",
+              "value": "test"
+            }
+          ],
+          "output": [
+            {
+              "name": "out",
+              "type": "string"
+            }
+          ]
+        },
+        "tasks": [
+          {
+            "id": "log",
+            "name": "Log Message",
+            "activity": {
+              "type": "log",
+              "input": {
+                "flowInfo": "false",
+                "addToFlow": "false"
+              },
+              "mappings": {
+                "input": [
+                  {
+                    "type": "assign",
+                    "value": "$property[log.message]",
+                    "mapTo": "message"
+                  }
+                ]
+              }
+            }
+          }
+        ],
+        "links": []
+      }
+    }
+  ],
+  "properties": [
+    {
+      "name": "log.message",
+      "type": "string",
+      "value": "Default message"
+    }
+  ]
+}
