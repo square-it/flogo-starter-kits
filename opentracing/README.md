@@ -4,7 +4,7 @@ This is a minimal Flogo application based on the [builtin Flogo example app](htt
 
 It adds the [*Square IT Services* OpenTracing contribution](https://github.com/square-it/flogo-opentracing-listener).
 
-## Prerequisites
+## Requirements
 
 * [Go language 1.11+](https://golang.org)
 * [Flogo CLI](https://github.com/project-flogo/cli)
