@@ -1,0 +1,143 @@
+{
+  "name": "multi-2triggers-3flows",
+  "type": "flogo:app",
+  "version": "0.0.1",
+  "appModel": "1.0.0",
+  "description": "A Flogo application with 2 triggers dispatching to 3 flows through 5 actions (3 + 2)",
+  "imports": [
+    "github.com/project-flogo/flow",
+    "github.com/project-flogo/contrib/trigger/rest",
+    "github.com/project-flogo/contrib/activity/log"
+  ],
+  "triggers": [
+    {
+      "id": "trigger1",
+      "ref": "#rest",
+      "settings": {
+        "port": "9233"
+      },
+      "handlers": [
+        {
+          "settings": {
+            "method": "GET",
+            "path": "/trigger1-action1"
+          },
+          "action": {
+            "ref": "#flow",
+            "settings": {
+              "flowURI": "res://flow:flow1"
+            },
+            "input": {
+              "input1": "trigger1-action1"
+            },
+            "output": {
+              "data": "=$.output1"
+            }
+          }
+        },
+        {
+          "settings": {
+            "method": "GET",
+            "path": "/trigger1-action2-or-action3"
+          },
+          "actions": [
+            {
+              "if": "$.headers.Foo == \"bar\"",
+              "id": "action2",
+              "input": {
+                "input1": "trigger1-action2"
+              },
+              "output": {
+                "data": "=$.output1"
+              }
+            },
+            {
+              "id": "action3",
+              "input": {
+                "input2": "trigger1-action3"
+              },
+              "output": {
+                "data": "=$.output2"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions":[
+    {
+      "id" : "action2",
+      "ref": "#flow",
+      "settings": {
+        "flowURI": "res://flow:flow1"
+      }
+    },
+    {
+      "id" : "action3",
+      "ref": "#flow",
+      "settings": {
+        "flowURI": "res://flow:flow2"
+      }
+    }
+  ],
+  "resources": [
+    {
+      "id": "flow:flow1",
+      "data": {
+        "name": "Flow 1",
+        "description": "Flow 1",
+        "metadata": {
+          "input": [
+            { "name":"input1", "type":"string" },
+          ],
+          "output":[
+            { "name":"output1", "type":"string" }
+          ]
+        },
+        "tasks": [
+        ],
+        "links": [
+        ]
+      }
+    },
+    {
+      "id": "flow:flow2",
+      "data": {
+        "name": "Flow 2",
+        "description": "Flow 2",
+        "metadata": {
+          "input": [
+            { "name":"input2", "type":"string" },
+          ],
+          "output":[
+            { "name":"output2", "type":"string" }
+          ]
+        },
+        "tasks": [
+        ],
+        "links": [
+        ]
+      }
+    },
+    {
+      "id": "flow:flow3",
+      "data": {
+        "name": "Flow 3",
+        "description": "Flow 3",
+        "metadata": {
+          "input": [
+            { "name":"input3", "type":"string" },
+          ],
+          "output":[
+            { "name":"output3", "type":"string" }
+          ]
+        },
+        "tasks": [
+        ],
+        "links": [
+        ]
+      }
+    }
+  ]
+}
