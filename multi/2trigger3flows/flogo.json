@@ -14,7 +14,7 @@
       "id": "trigger1",
       "ref": "#rest",
       "settings": {
-        "port": "9233"
+        "port": "8081"
       },
       "handlers": [
         {
@@ -58,6 +58,53 @@
               },
               "output": {
                 "data": "=$.output2"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "trigger2",
+      "ref": "#rest",
+      "settings": {
+        "port": "8082"
+      },
+      "handlers": [
+        {
+          "settings": {
+            "method": "GET",
+            "path": "/trigger2-action1"
+          },
+          "action": {
+            "ref": "#flow",
+            "settings": {
+              "flowURI": "res://flow:flow2"
+            },
+            "input": {
+              "input1": "trigger2-action1"
+            },
+            "output": {
+              "data": "=$.output2"
+            }
+          }
+        },
+        {
+          "settings": {
+            "method": "GET",
+            "path": "/trigger2-action2"
+          },
+          "actions": [
+            {
+              "ref": "#flow",
+              "settings": {
+                "flowURI": "res://flow:flow3"
+              },
+              "input": {
+                "input3": "trigger2-action2"
+              },
+              "output": {
+                "data": "=$.output3"
               }
             }
           ]
