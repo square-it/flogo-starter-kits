@@ -136,7 +136,7 @@
         "description": "Flow 1",
         "metadata": {
           "input": [
-            { "name":"input1", "type":"string" },
+            { "name":"input1", "type":"string" }
           ],
           "output":[
             { "name":"output1", "type":"string" }
@@ -155,7 +155,7 @@
         "description": "Flow 2",
         "metadata": {
           "input": [
-            { "name":"input2", "type":"string" },
+            { "name":"input2", "type":"string" }
           ],
           "output":[
             { "name":"output2", "type":"string" }
@@ -174,7 +174,7 @@
         "description": "Flow 3",
         "metadata": {
           "input": [
-            { "name":"input3", "type":"string" },
+            { "name":"input3", "type":"string" }
           ],
           "output":[
             { "name":"output3", "type":"string" }
